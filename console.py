@@ -128,7 +128,10 @@ class HBNBCommand(cmd.Cmd):
         for item in args:
             if '=' in item:
                 splited = item.split('=')
-                kwargs[splited[0]] = json.loads(splited[1].replace(" ", "_"))
+                result = json.loads(splited[1])
+                if isinstance(result, str):
+                    result = result.replace("_", " ")
+                kwargs[splited[0]] = result
 
         new_instance = HBNBCommand.classes[args[0]](**kwargs)
         new_instance.save()
