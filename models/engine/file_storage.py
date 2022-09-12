@@ -14,8 +14,7 @@ class FileStorage:
         if cls:
             obj_list = {}
             for key, value in FileStorage.__objects.items():
-                splited = key.split(".")
-                if splited[0] == cls.__name__:
+                if type(value) == cls:
                     obj_list[key] = value
         return obj_list
 
