@@ -46,7 +46,7 @@ class DBStorage:
                                 (type(row).__name__, row.id,): row})
         else:
             # query all types of objects
-            for key, value in all_classes.items():
+            for key, val in all_classes.items():
                 for row in self.__session.query(val):
                     obj_dict.update({'{}.{}'.format
                                     (type(row).__name__, row.id,): row})
