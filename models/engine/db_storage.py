@@ -12,8 +12,8 @@ from os import getenv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker, Session
 
-all_classes = {'State': State, 'City': City, 
-               'User': User, 'Place': Place, 
+all_classes = {'State': State, 'City': City,
+               'User': User, 'Place': Place,
                'Review': Review, 'Amenity': Amenity}
 
 
@@ -65,8 +65,7 @@ class DBStorage:
             cls_name = all_classes[type(obj).__name]
 
             # query class table and delete
-            self.__session.query(cls_name) \
-                .filter(cls_name.id == obj.id).delete()
+            self.__session.query(cls_name).filter(cls_name.id == obj.id).delete()
 
     def reload(self):
         """Creates the database session"""
