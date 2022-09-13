@@ -3,6 +3,7 @@
 import cmd
 import sys
 import json
+import shlex
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -11,19 +12,16 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+from models import classes
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
+    classes = classes
+
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
              'number_rooms': int, 'number_bathrooms': int,
@@ -212,30 +210,25 @@ class HBNBCommand(cmd.Cmd):
         print("[Usage]: destroy <className> <objectId>\n")
 
 
-    def do_all(self, args):
+    def do_all(self, line):
         """Revised do_all method to accomodate DBStorage"""
-        """Prints all string representation of all instances
-        Exceptions:
-            NameError: when there is no object that has the name
-        """
-        objects = storage.all()
-        my_list = []
-        if not args:
-            for key in objects:
-                my_list.append(objects[key])
-            print(my_list)
-            return
-        try:
-            line = args.split(" ")
+        """Prints all string representation of all instances"""
+        args = shlex.split(line)
+        obj_list = []
+        if len(args) >= 1:
             if args[0] not in HBNBCommand.classes:
-                raise NameError()
-            for key in objects:
-                name = key.split('.')
-                if name[0] == line[0]:
-                    my_list.append(objects[key])
-            print(my_list)
-        except NameError:
-            print("** class doesn't exist **")
+                print("** class doesn't exist **")
+            else:
+                objs = storage.all(args[0])
+                for key, obj in objs.items():
+                    if key.startswith(args[0]):
+                        obj_list.append(obj)
+                print(obj_list)
+        else:
+            objs = storage.all()
+            for obj in objs.values():
+                obj_list.append(obj)
+            print(obj_list)
 
     def help_all(self):
         """ Help information for the all command """
