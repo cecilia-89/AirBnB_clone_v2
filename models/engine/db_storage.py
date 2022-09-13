@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """A database storage engine"""
+import models
 from models.base_model import BaseModel, Base
 from models.user import User
+from models import classes
 from models.place import Place
 from models.review import Review
 from models.city import City
@@ -11,10 +13,6 @@ from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker, Session
-
-all_classes = {'State': State, 'City': City, 
-               'User': User, 'Place': Place, 
-               'Review': Review, 'Amenity': Amenity}
 
 
 class DBStorage:
@@ -36,18 +34,25 @@ class DBStorage:
 
     def all(self, cls=None):
         """Method that queries and returns all objects by class"""
-        objs_dict = {}
+        """Query and return all objects by class/generally
+        Return: dictionary (<class-name>.<object-id>: <obj>)
+        """
+        obj_dict = {}
         objs = None
+
         if cls:
-            if type(cls) is str and cls in all_classes:
-                cls = all_classes[cls]
-            objs = self.__session.query(cls).all()
+            if cls in classes:
+                cls = classes[cls]
+            objs = self.__session.query(cls)
         else:
-            objs = self.__session.query(User, State, City, Place, Review, Amenity).all()
-        for obj in objs:
-            key = "{}.{}".format(type(obj).__name__, obj.id)
-            objs_dict[key] = obj
-        return (objs_dict)
+            objs = self.__session.query \
+                       (User, State, City, Amenity, Place, Review)
+        for row in objs:
+            # populate dict with objects from storage
+            key = '{}.{}'.format(type(row).__name__, row.id)
+
+            obj_dict[key] = row
+        return obj_dict
 
 
     def new(self, obj):
@@ -62,7 +67,7 @@ class DBStorage:
         """Deletes an object from the current session if obj not None"""
         if obj:
             # if an object is provided, determine class from obj
-            cls_name = all_classes[type(obj).__name]
+            cls_name = classes[type(obj).__name]
 
             # query class table and delete
             self.__session.query(cls_name) \
