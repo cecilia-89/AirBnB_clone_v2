@@ -13,10 +13,10 @@ class State(BaseModel, Base):
         name: input name
     """
     __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
-        name = Column(String(128), nullable=False)
-        cities = relationship('City', cascade='all, delete', backref='state')
+        cities = relationship('City', cascade='delete', backref='state')
     else:
         name = ""
 
