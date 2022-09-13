@@ -65,7 +65,8 @@ class DBStorage:
             cls_name = all_classes[type(obj).__name]
 
             # query class table and delete
-            self.__session.query(cls_name).filter(cls_name.id == obj.id).delete()
+            self.__session.query(cls_name) \
+                .filter(cls_name.id == obj.id).delete()
 
     def reload(self):
         """Creates the database session"""
