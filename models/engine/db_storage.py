@@ -9,10 +9,12 @@ from models.state import State
 from models.amenity import Amenity
 from sqlalchemy import create_engine
 from os import getenv
-from sqlalchemy.orm import sessionmaker, scoped_session, Session
+from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm.session import sessionmaker, Session
 
-all_classes = {'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review, 'Place': Place, 'User': User}
+all_classes = {'State': State, 'City': City, 
+               'User': User, 'Place': Place, 
+               'Review': Review, 'Amenity': Amenity}
 
 
 class DBStorage:
@@ -33,24 +35,20 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """Method that queries all objects by class
-        Returns: dictionary(<class_name>.<id>: <obj>)
-        """
-        obj_dict = {}
-
+        """Method that queries and returns all objects by class"""
+        objs_dict = {}
+        objs = None
         if cls:
-            # query all objects on the current database session
-            for row in self.__session.query(cls).all():
-                # populate the dict with objects from storage
-                obj_dict.update({'{}.{}'.format
-                                (type(row).__name__, row.id,): row})
+            if type(cls) is str and cls in all_classes:
+                cls = all_classes[cls]
+            objs = self.__session.query(cls).all()
         else:
-            # query all types of objects
-            for key, val in all_classes.items():
-                for row in self.__session.query(val):
-                    obj_dict.update({'{}.{}'.format
-                                    (type(row).__name__, row.id,): row})
-        return obj_dict
+            objs = self.__session.query(User, State, City, Place, Review, Amenity).all()
+        for obj in objs:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            objs_dict[key] = obj
+        return (objs_dict)
+
 
     def new(self, obj):
         """Adds object to current database session"""
