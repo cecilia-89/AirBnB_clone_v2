@@ -14,6 +14,13 @@ from os import getenv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker, Session
 
+<<<<<<< HEAD
+=======
+all_classes = {'State': State, 'City': City,
+               'User': User, 'Place': Place,
+               'Review': Review, 'Amenity': Amenity}
+
+>>>>>>> 1df215ffadd5e37f028f850ced02ab191c516bd0
 
 class DBStorage:
     """DBStorage of the AirBnB project"""
