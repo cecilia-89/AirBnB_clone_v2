@@ -1,18 +1,7 @@
 #!/usr/bin/python3
 """ Module for testing database storage"""
 import unittest
-from models.state import State
-from models.base_model import BaseModel
-from models.city import City
-from models.review import Review
-from models.place import Place
-from models.amenity import Amenity
-from models.user import User
-from models.engine.db_storage import DBStorage
 
-
-db = DBStorage()
-s1 = State(name="california")
 
 
 class test_db_storage(unittest.TestCase):
@@ -37,3 +26,6 @@ class test_db_storage(unittest.TestCase):
     def all(self):
         """test all method of the db storage"""
         pass
+
+if __name__ == "__main__":
+    unittest.main()
