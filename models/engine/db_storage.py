@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm.session import sessionmaker, Session
-
+from models import classes
 
 class DBStorage:
     """DBStorage of the AirBnB project"""
