@@ -11,11 +11,31 @@ from models.user import User
 from models.engine.db_storage import DBStorage
 
 
+db = DBStorage()
+s1 = State(name="california")
+
 class test_db_storage(unittest.TestCase):
     """class to test database storage"""
 
     def test_create(self):
-        """test create"""
-        s1 = State(name="california")
-        db = DBStorage()
-        length = len(db.all(s1).keys())
+        """test create method of the db storage"""
+        db.new(s1)
+        db.save(s1)
+        new_db = DBStorage
+        self.assertGreater(new_db, db)
+
+    def test_delete(self):
+        """test delete method of db storage"""
+        pass
+
+    def test_close(self):
+        """test close method of the db storage"""
+        pass
+
+    def test_reload(self):
+        """test reload method of the db storage"""
+        pass
+
+    def all(self):
+        """test all method of the db storage"""
+        pass
