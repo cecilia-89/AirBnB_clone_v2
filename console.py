@@ -215,20 +215,19 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances"""
         args = shlex.split(line)
         obj_list = []
-        if len(args) >= 1:
-            if args[0] not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-            else:
-                objs = storage.all(args[0])
-                for key, obj in objs.items():
-                    if key.startswith(args[0]):
-                        obj_list.append(obj)
-                print(obj_list)
+        if len(args) == 0:
+            obj_dict = storage.all()
+        elif args[0] in HBNBCommand.classes:
+            obj_dict = storage.all(HBNBCommand.classes[args[0]])
         else:
-            objs = storage.all()
-            for obj in objs.values():
-                obj_list.append(obj)
-            print(obj_list)
+            print("** class doesn't exist **")
+            return False
+
+        for key in obj_dict:
+            obj_list.append(str(obj_dict[key]))
+        print("[", end="")
+        print(", ".join(obj_list), end="")
+        print("]")
 
     def help_all(self):
         """ Help information for the all command """
