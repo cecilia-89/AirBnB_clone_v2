@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 #sets up web servers for the deployment of web_static
 
-if (( $(dpkg-query -W -f='${Status}' nginx 2>/dev/null | grep -c "ok installed") == 0))
-then sudo apt-get update
-	 sudo apt-get install nginx
-fi
-
+sudo apt-get update
+sudo apt-get install nginx
 
 sudo mkdir -p /data/web_static/releases/test
 sudo mkdir -p /data/web_static/shared/
