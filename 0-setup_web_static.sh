@@ -10,9 +10,9 @@ fi
 sudo mkdir -p /data/web_static/releases/test
 sudo mkdir -p /data/web_static/shared/
 
-echo "Holberton School" > /data/web_static/releases/test/index.html
+echo "Holberton School" | sudo tee -a /data/web_static/releases/test/index.html
 
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu /data/
 sudo chgrp -R ubuntu /data/
 
