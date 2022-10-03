@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" Module: 1-pack_web_static
-	archives web static
+"""Module: 1-pack_web_static archives web static.
 """
 
 from datetime import datetime
@@ -9,7 +8,7 @@ import os.path as path
 
 
 def do_pack():
-	""" Creates an archive of web_static folder"""
+	"""Creates an archive of web_static folder."""
 	date = str(datetime.now())
 	for i in [':','-','.',' ']:
 		date = date.replace(i, '')
