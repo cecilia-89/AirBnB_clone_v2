@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Module: 1-pack_web_static archives web static.
-"""
+# Fabfile to generates a .tgz archive from the contents of web_static.
 
 from datetime import datetime
 from fabric.api import local
