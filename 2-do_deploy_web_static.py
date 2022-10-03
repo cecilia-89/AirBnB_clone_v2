@@ -10,7 +10,14 @@ env.hosts = ['34.225.194.161', '44.197.209.34']
 
 
 def do_pack():
-    """Creates an archive of web_static folder."""
+    """Distributes an archive to a web server.
+    Args:
+        archive_path (str): The path of the archive to distribute.
+    Returns:
+        If the file doesn't exist at archive_path or an error occurs - False.
+        Otherwise - True.
+    """
+
     date = str(datetime.now())
     for i in [':', '-', '.', ' ']:
         date = date.replace(i, '')
@@ -25,7 +32,13 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """deploys archive to the remote servers"""
+    """Distributes an archive to a web server.
+    Args:
+        archive_path (str): The path of the archive to distribute.
+    Returns:
+        If the file doesn't exist at archive_path or an error occurs - False.
+        Otherwise - True.
+    """
     if not path.exists(archive_path):
         return False
 
