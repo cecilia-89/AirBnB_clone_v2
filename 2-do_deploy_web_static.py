@@ -10,6 +10,7 @@ env.hosts = ['34.225.194.161', '44.197.209.34']
 
 def do_pack():
     """Creates an archive of web_static folder."""
+    
     date = str(datetime.now())
     for i in [':', '-', '.', ' ']:
         date = date.replace(i, '')
@@ -25,6 +26,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """deploys archive to the remote servers"""
+
     if not path.isdir(archive_path):
         return False
 
