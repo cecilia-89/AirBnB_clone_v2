@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Fabfile to generates a .tgz archive from the contents of web_static.
 
+
 from datetime import datetime
 from fabric.api import *
 import os.path as path
@@ -10,13 +11,8 @@ env.hosts = ['34.225.194.161', '44.197.209.34']
 
 
 def do_pack():
-    """Distributes an archive to a web server.
-    Args:
-        archive_path (str): The path of the archive to distribute.
-    Returns:
-        If the file doesn't exist at archive_path or an error occurs - False.
-        Otherwise - True.
-    """
+    """Creates an archive of web_static folder."""
+
 
     date = str(datetime.now())
     for i in [':', '-', '.', ' ']:
@@ -32,13 +28,9 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """Distributes an archive to a web server.
-    Args:
-        archive_path (str): The path of the archive to distribute.
-    Returns:
-        If the file doesn't exist at archive_path or an error occurs - False.
-        Otherwise - True.
-    """
+    """deploys archive to the remote servers"""
+
+
     if not path.exists(archive_path):
         return False
 
