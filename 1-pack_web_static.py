@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Module: 1-pack_web_static"""
+""" Module: 1-pack_web_static
+	archives web static
+"""
 
 from datetime import datetime
 from fabric.api import local
@@ -7,7 +9,7 @@ import os.path as path
 
 
 def do_pack():
-	"""archives web_static folder"""
+	""" Creates an archive of web_static folder"""
 	date = str(datetime.now())
 	for i in [':','-','.',' ']:
 		date = date.replace(i, '')
