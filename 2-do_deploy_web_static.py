@@ -5,12 +5,12 @@ from datetime import datetime
 from fabric.api import *
 import os.path as path
 
+env.user = 'ubuntu'
 env.hosts = ['34.225.194.161', '44.197.209.34']
 
 
 def do_pack():
     """Creates an archive of web_static folder."""
-    
     date = str(datetime.now())
     for i in [':', '-', '.', ' ']:
         date = date.replace(i, '')
@@ -26,22 +26,25 @@ def do_pack():
 
 def do_deploy(archive_path):
     """deploys archive to the remote servers"""
-
-    if not path.isdir(archive_path):
+    if not path.exists(archive_path):
         return False
 
-    splited = archive_path.split('.')
+    splited = archive_path.split('.')[0].split('/')
 
-    if put(f"{archive_path}, /tmp/").failed:
+    if put(f'versions/{splited[1]}.tgz', '/tmp/').failed:
         return False
-    if run(f"tar -xf {archive_path}\
-           -C /data/web_static/releases/{splited[0]}").failed:
+    if run(f"mkdir -p /data/web_static/releases/{splited[1]}").failed:
         return False
-    if run(f"rm /tmp/{archive_path}").failed:
+    if run(f"tar -xf /tmp/{splited[1]}.tgz\
+        -C /data/web_static/releases/{splited[1]}").failed:
+        return False
+    if run(f"rm /tmp/{splited[1]}.tgz").failed:
         return False
     if run("rm -r /data/web_static/current").failed:
         return False
-    if run(f"ln -s /data/web_static/releases/{splited[0]} \
+
+    if run(f"ln -s /data/web_static/releases/{splited[1]} \
            /data/web_static/current").failed:
-        return False
+           return False
+
     return True
