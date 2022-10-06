@@ -10,9 +10,9 @@ def do_pack():
     """creates a .tgz archive"""
     date = strf("%Y%M%d%H%M%S")
     try:
-        file = f"web_static_{date}.tgz"
+		file = "web_static_{}.tgz".format(date)
         local("mkdir versions")
-        local(f"tar -czvf versions/{file} web_static")
+        local("tar -czvf versions/{} web_static").format(file)
         return file
     except:
         return None
