@@ -17,4 +17,12 @@ sed -i '47a \\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t
 
 service nginx restart
 
- 
+ try:
+        
+        file = f"web_static_{date}.tgz"
+        local("mkdir versions")
+        local(f"tar -czvf versions/{file} web_static")
+        return file
+
+    except Exception as err:
+        return None
