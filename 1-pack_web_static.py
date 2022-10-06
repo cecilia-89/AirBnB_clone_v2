@@ -4,12 +4,11 @@ from time import strftime
 from fabric.api import local
 
 def do_pack():
-    """Creates an archive of web_static folder"""
-     """Create a tar gzipped archive of the directory web_static."""
+    """Create a tar gzipped archive of the directory web_static."""
     dt = datetime.utcnow()
     file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
                                                          dt.month,
-                                                     dt.day,
+                                                         dt.day,
                                                          dt.hour,
                                                          dt.minute,
                                                          dt.second)
