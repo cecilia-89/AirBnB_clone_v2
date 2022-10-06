@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
 Module: 1-pack_web_static
-Usage: fab -f 1-pack_web_static.py do_pack
 """
 from fabric.api import local
 from time import strftime
