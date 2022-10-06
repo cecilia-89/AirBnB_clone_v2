@@ -16,3 +16,13 @@ chgrp -R ubuntu /data/
 sed -i '47a \\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-available/default
 
 service nginx restart
+
+ try:
+        date = strf("%Y%M%d%H%M%S")
+        file = f"web_static_{date}.tgz"
+        local("mkdir versions")
+        local(f"tar -czvf versions/{file} web_static")
+        return file
+
+    except Exception as err:
+        return None
