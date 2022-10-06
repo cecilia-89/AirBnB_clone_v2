@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 # Fabfile to generates a .tgz archive from the contents of web_static.
-
-from time import strftime
 from fabric.api import local
+from time import strftime
 
 
 def do_pack():
