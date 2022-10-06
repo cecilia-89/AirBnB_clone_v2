@@ -8,10 +8,10 @@ from time import strftime
 
 def do_pack():
     """creates a .tgz archive"""
-    date = strf("%Y%M%d%H%M%S")
+    date_time = strf("%Y%M%d%H%M%S")
     try:
         local("mkdir -p versions")
-        filename = "versions/web_static_{}.tgz".format(date)
+        filename = "versions/web_static_{}.tgz".format(date_time)
         msg = 'Packing web_static to {}'.format(filename)
         print(msg)
         local("tar -cvzf {} web_static/".format(filename))
