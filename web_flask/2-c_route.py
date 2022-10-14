@@ -8,17 +8,18 @@ def hello_HBNB():
     """returns Hello HBNB on port 5000"""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """returns hbnb on port 5000"""
     return "HBNB"
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_is(text):
-    """returns C is <text>"""
-    return "C {text}".format(text)
+    """returns C <text>"""
+    return f"C {text}"
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
- 
