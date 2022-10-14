@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """starts a simple flask web app"""
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 @app.route('/', strict_slashes=False)
@@ -51,4 +51,3 @@ def odd_or_even(n):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
-    
