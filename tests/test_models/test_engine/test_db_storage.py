@@ -38,3 +38,4 @@ class test_db_storage(unittest.TestCase):
 
     def all(self):
         """test all method of the db storage"""
+        pass
