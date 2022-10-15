@@ -60,3 +60,8 @@ class FileStorage:
         if obj:
             key =  obj.__class__.__name__ + '.' + obj.id
             del FileStorage.__objects[key]
+
+
+    def close(self):
+        """calls reload on the object instance"""
+        reload(self)
