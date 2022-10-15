@@ -54,6 +54,7 @@ class Place(BaseModel, Base):
         @property
         def reviews(self):
             """
+            Gets the list of Amenity objects
             """
             reviews_dict = models.storage.all('Review')
             reviews_list = []
