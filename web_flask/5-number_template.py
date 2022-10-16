@@ -3,6 +3,8 @@
 from flask import Flask, render_template
 
 app = Flask(__name__)
+
+
 @app.route('/', strict_slashes=False)
 def hello_HBNB():
     """returns Hello HBNB on port 5000"""
