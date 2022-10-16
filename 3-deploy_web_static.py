@@ -12,6 +12,7 @@ env.hosts = ['34.225.194.161', '44.197.209.34']
 def do_pack():
     """creates an archive of web_static folder."""
     try:
+
         date = strftime("%Y%M%d%H%M%S")
         file = f"web_static_{date}.tgz"
         local("mkdir -p versions")
@@ -20,7 +21,6 @@ def do_pack():
 
     except Exception as err:
         return None
-
 
 
 def do_deploy(archive_path):

@@ -26,6 +26,7 @@ def do_deploy(archive_path):
     """deploys archive to the remote servers"""
 
     try:
+        
         path.exists(archive_path)
         splited = archive_path.split('.')[0].split('/')
 
