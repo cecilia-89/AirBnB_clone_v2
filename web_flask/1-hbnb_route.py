@@ -3,15 +3,17 @@
 from flask import Flask
 
 app = Flask(__name__)
+
+
 @app.route('/', strict_slashes=False)
 def hello_HBNB():
-    """returns Hello HBNB on port 5000"""
+    """Displays 'Hello HBNB!'"""
     return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """returns hbnb on port 5000"""
+    """Displays 'HBNB'"""
     return "HBNB"
 
 
