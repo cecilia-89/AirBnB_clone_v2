@@ -5,13 +5,17 @@ from models import storage
 from models.state import State
 
 app = Flask(__name__)
-
-@app.route('/states/<id>', strict_slashes=False)
 @app.route('/states/', strict_slashes=False)
-def list_states():
+@app.route('/states/<id>', strict_slashes=False)
+def list_states(id=""):
     """lists all cities in alphabetical order"""
-    Storage = storage.all(State).values()
-    return render_template("8-cities_by_states.html", States=Storage)
+    Storage = storage.all(State)
+    for state in Storage.values():
+        if state.id == id:
+            return render_template("9-states.html", States=state)
+        elif id == "":
+            return render_template("9-states.html", States=Storage)
+    return render_template("9-states.html")
 
 
 @app.teardown_appcontext
