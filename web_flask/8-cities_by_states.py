@@ -5,17 +5,19 @@ from models import storage
 from models.state import State
 
 app = Flask(__name__)
+
+
+@app.route('/cities_by_states', strict_slashes=False)
+def list_states():
+    """lists all cities in alphabetical order"""
+    Storage = storage.all(State).values()
+    return render_template("8-cities_by_states.html", States=Storage)
+
+
 @app.teardown_appcontext
 def tear_Down(exception):
     """closes a db session or reload file storage"""
     storage.close()
-
-
-@app.route('/states_list', strict_slashes=False)
-def list_states():
-    """lists all states in alphabetical order"""
-    States = storage.all(State).values()
-    return render_template("7-states_list.html", States=States)
 
 
 if __name__ == "__main__":
