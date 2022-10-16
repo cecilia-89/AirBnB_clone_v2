@@ -4,20 +4,22 @@ from flask import Flask, render_template
 from models import storage
 from models.state import State
 
-
 app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False)
+def states():
+    """displays all the states"""
+    Storage = storage.all(State)
+    return render_template("9-states.html", States=Storage)
+
+
 @app.route('/states/<id>', strict_slashes=False)
-def list_states(id=""):
+def list_states(id):
     """lists all cities in alphabetical order"""
-    States = storage.all(State)
-    for state in States.values():
+    for state in storage.all(State).values():
         if state.id == id:
             return render_template("9-states.html", States=state)
-        elif id == "":
-            return render_template("9-states.html", States=States)
     return render_template("9-states.html")
 
 
