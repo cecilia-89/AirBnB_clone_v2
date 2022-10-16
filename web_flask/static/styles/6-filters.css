@@ -13,7 +13,6 @@
 	float: left;
 	height: 100%;
 	width: 25%;
-
 	line-height: 20px;
 	border-right: 1px solid #DDDDDD;
 }
@@ -43,6 +42,7 @@
 
 .locations:hover .popover {
 	display: inline-block;
+	z-index: 1;
 }
 
 .amenities:hover .popover {
