@@ -13,7 +13,7 @@ app = Flask(__name__)
 def list_states(id=""):
     """lists all cities in alphabetical order"""
     States = storage.all(State)
-    for state in Storage.values():
+    for state in States.values():
         if state.id == id:
             return render_template("9-states.html", States=state)
         elif id == "":
