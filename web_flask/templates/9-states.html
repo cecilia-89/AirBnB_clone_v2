@@ -18,7 +18,7 @@
 
    {%elif States is defined%}
 
-    <h1>States: {{States.name}}</h1>
+    <h1>State: {{States.name}}</h1>
     <h3>Cities:</h3>
     <ul>
         {%for city in States.cities | sort(attribute="name")%}
